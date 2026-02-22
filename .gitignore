@@ -17,6 +17,9 @@ eggs/
 lib/
 lib64/
 parts/
+
+events.db
+members.db
 sdist/
 var/
 wheels/
