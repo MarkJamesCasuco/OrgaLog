@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+}textarea {
+    display: block;
+    margin-top: 15px;
+}
+.edit-button-page {
+    margin-top: 15px;
+}
+th, td {
+    overflow: hidden;        /* Hide overflow */
+    text-overflow: ellipsis; /* Add ... when text is cut */
+    white-space: nowrap;     /* Don't wrap to new line */
+    text-align: left;     /* Align text to the left */
+}
+.events-table th:nth-child(1), td:nth-child(1) { width: 5%; }   /* # */
+.events-table th:nth-child(2), td:nth-child(2) { width: 25%; }  /* Title */
+.events-table th:nth-child(3), td:nth-child(3) { width: 10%; }  /* Date */
+.events-table th:nth-child(4), td:nth-child(4) { width: 15%; }  /* Location */
+.events-table th:nth-child(5), td:nth-child(5) { width: 30%; }  /* Description */
+.events-table th:nth-child(6), td:nth-child(6) { width: 10%; }  /* Category */
+.events-table th:nth-child(7), td:nth-child(7) { width: 5%; }   /* Edit */
+
+.members-table th:nth-child(1), .members-table td:nth-child(1) { width: 5%; }   /* # */
+.members-table th:nth-child(2), .members-table td:nth-child(2) { width: 30%; }  /* Name */
+.members-table th:nth-child(3), .members-table td:nth-child(3) { width: 25%; }  /* Section */
+.members-table th:nth-child(4), .members-table td:nth-child(4) { width: 30%; }  /* Facebook */
+.members-table th:nth-child(5), .members-table td:nth-child(5) { width: 10%; }  /* Edit */

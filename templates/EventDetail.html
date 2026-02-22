@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Event Details</title>
+</head>
+<body> 
+    <h1>{{ event.title}}</h1>
+    <h3>Date: {{ event.date }}</h3>
+    <h3>Location: {{ event.location }}</h3>
+    <h3>Category: {{ event.category }}</h3>
+    <h3>Description:</h3>
+    <p>{{ event.description }}</p>
+    <button onclick="window.location.href='/'">Back</button><button onclick="window.location.href='/EditEvent/{{ event.id }}'">Edit Event</button>
+</body>
+</html>
