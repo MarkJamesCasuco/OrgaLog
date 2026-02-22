@@ -17,6 +17,8 @@ eggs/
 lib/
 lib64/
 parts/
+
+orgalog.db
 sdist/
 var/
 wheels/
