@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OrgaLog Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+
+  <body>
+    <h1>Welcome to OrgaLog!</h1>
+    <form action="/" method="GET">
+      <input type="text" name="search" placeholder="Search events..." value="{{ search_query or '' }}"/>
+      <select name="category">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+          <option value="{{ category }}" {% if category == selected_category %}selected{% endif %}>
+            {{ category }}
+          </option>
+        {% endfor %}
+      </select>
+      <select name="date_sort">
+        <option value="">Sort by...</option>
+        <option value="date_newest">Newest First</option>
+        <option value="date_oldest">Oldest First</option>
+      </select>
+      <button>Search Events</button>
+    </form>
+    <h2>Recent Events</h2>
+    {% if events %}
+    <table class="events-table">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th></th>
+      </tr>
+      {% for event in events %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>
+          <strong>
+            {% if event.date >= today %}
+              <a href="/EventDetail/{{ event.id }}">{{ event.title }}(Upcoming)</a>
+            {% else %}
+              <a href="/EventDetail/{{ event.id }}">{{ event.title }}</a>
+            {% endif %}
+          </strong>
+        </td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.description[:description_preview_length] }}{% if event.description|length > description_preview_length %}...{% endif %}</td>
+        <td>{{ event.category }}</td>
+        <td>
+          <button onclick="window.location.href='/EditEvent/{{ event.id }}'">
+            Edit
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>No events yet! Add your first event.</p>
+    {% endif %}
+    <button onclick="window.location.href = '/AddEvent'">Add New Event</button>
+
+    <h2>List of Members</h2>
+    {% if members %}
+    <h4>Total Members: {{ members|length }}</h4>
+    <table class="members-table">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Section</th>
+        <th>Facebook</th>
+        <th></th>
+      </tr>
+      {% for member in members %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ member.name }}</td>
+        <td>{{ member.section }}</td>
+        <td>{{ member.facebook }}</td>
+        <td><button onclick="window.location.href='/EditMember/{{ member.id }}'">Edit</button></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>No members yet! Add your first member.</p>
+    {% endif %}
+    <button onclick="window.location.href = '/AddMember'">Add New Member</button>
+  </body>
+</html>

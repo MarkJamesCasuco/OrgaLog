@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Edit Event</title>
+</head>
+<body> 
+  <h1>Event Editor</h1>
+  <form action="/UpdateEvent" method="POST">
+    <input type="hidden" name="id" value="{{ event.id }}">
+    
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="{{ event.title }}" required>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" value="{{ event.date }}" required>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" value="{{ event.location }}" required>
+
+    <label for="category">Category:</label><br>
+    <select id="category-select" name="category-dropdown" required>
+      <option value="">Select category...</option>
+      {% for category in categories %}
+        <option value="{{ category }}" 
+            {% if category == event.category %}selected{% endif %}>
+          {{ category }}
+        </option>
+      {% endfor %}
+      <option value="new">+ Add New Category</option>
+    </select>
+    <input type="text" id="new-category-input" name="category" style="display:none;" placeholder="Enter new category">
+    
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter event description..." required>{{ event.description }}</textarea>
+
+    <button type="button" onclick="window.location.href='/'" class="edit-button-page">Cancel</button>
+    <button type="submit" class="edit-button-page">Save Changes</button>
+    <button type="button" onclick="if(confirm('Are you sure?')) window.location.href='/DeleteEvent/{{ event.id }}'" class="edit-button-page">Delete Event</button>
+  </form>
+
+  <script>
+    document.getElementById('category-select').addEventListener('change', function() {
+      if (this.value === 'new') {
+        document.getElementById('new-category-input').style.display = 'block';
+      } else {
+        document.getElementById('new-category-input').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
